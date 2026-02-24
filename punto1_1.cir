@@ -1,0 +1,75 @@
+*Punto 1.1
+.include "./not_nand_nor_subckt.cir"
+
+* Fuentes
+vdd 1 0 {v_value}
+va 2 0 pulse(0 {v_value} 20n 50p 50p 20n 40.1n)
+vb 3 0 pulse(0 {v_value} 40.05n 50p 50p 40.05n 80.1n)
+
+* Compuertas
+    * NAND
+x_nand 2 3 51 1 0 nand
+    * NOR
+x_nor 2 3 52 1 0 nor
+    * AND
+x_and_1 2 3 43 1 0 nand
+x_and_2 43 53 1 0 not
+    * OR
+x_or_1 2 3 44 1 0 nor
+x_or_2 44 54 1 0 not
+    * XOR
+x_xor_1 2 46 1 0 not
+x_xor_2 3 47 1 0 not
+x_xor_3 46 3 55 1 0 nand
+x_xor_4 47 2 56 1 0 nand
+x_xor_5 55 56 60 1 0 nand
+    * XNOR
+x_xnor_1 2 48 1 0 not
+x_xnor_2 3 49 1 0 not
+x_xnor_3 2 3 57 1 0 nand
+x_xnor_4 48 49 58 1 0 nand
+x_xnor_5 57 58 61 1 0 nand
+
+* Carga
+cload1 51 0 {c_value}
+cload2 52 0 {c_value}
+cload3 53 0 {c_value}
+cload4 54 0 {c_value}
+cload5 60 0 {c_value}
+* cload6 61 0 {c_value}
+
+.param v_value = 1.5
+.param c_value = 200f
+
+.tran 3ps 80.1n
+
+.control
+    set color0="white"
+    set xbrushwidth=2
+    run
+
+    * set curplottitle="NAND"
+    * plot v(2) v(3)
+    * plot v(51)
+
+    * set curplottitle="NOR"
+    * plot v(2) v(3)
+    * plot v(52)
+
+    * set curplottitle="AND"
+    * plot v(2) v(3)
+    * plot v(53)
+
+    * set curplottitle="OR"
+    * plot v(2) v(3)
+    * plot v(54)
+
+    * set curplottitle="XOR"
+    * plot v(2) v(3)
+    * plot v(60)
+
+    set curplottitle="XNOR"
+    plot v(2) v(3)
+    plot v(61)
+.endc
+.end
