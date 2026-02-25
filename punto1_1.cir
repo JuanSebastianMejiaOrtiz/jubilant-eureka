@@ -36,11 +36,13 @@ cload2 52 0 {c_value}
 cload3 53 0 {c_value}
 cload4 54 0 {c_value}
 cload5 60 0 {c_value}
-* cload6 61 0 {c_value}
+cload6 61 0 {c_value}
 
+* Parametros
 .param v_value = 1.5
 .param c_value = 200f
 
+* Modo de operacion
 .tran 3ps 80.1n
 
 .control
