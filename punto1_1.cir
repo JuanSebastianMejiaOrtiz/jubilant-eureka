@@ -48,25 +48,25 @@ cload5 60 0 {c_value}
     set xbrushwidth=2
     run
 
-    * set curplottitle="NAND"
-    * plot v(2) v(3)
-    * plot v(51)
+    set curplottitle="NAND"
+    plot v(2) v(3)
+    plot v(51)
 
-    * set curplottitle="NOR"
-    * plot v(2) v(3)
-    * plot v(52)
+    set curplottitle="NOR"
+    plot v(2) v(3)
+    plot v(52)
 
-    * set curplottitle="AND"
-    * plot v(2) v(3)
-    * plot v(53)
+    set curplottitle="AND"
+    plot v(2) v(3)
+    plot v(53)
 
-    * set curplottitle="OR"
-    * plot v(2) v(3)
-    * plot v(54)
+    set curplottitle="OR"
+    plot v(2) v(3)
+    plot v(54)
 
-    * set curplottitle="XOR"
-    * plot v(2) v(3)
-    * plot v(60)
+    set curplottitle="XOR"
+    plot v(2) v(3)
+    plot v(60)
 
     set curplottitle="XNOR"
     plot v(2) v(3)

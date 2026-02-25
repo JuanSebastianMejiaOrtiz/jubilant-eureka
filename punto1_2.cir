@@ -1,0 +1,30 @@
+*Punto 1.2
+.include "./not_nand_nor_subckt.cir"
+
+* Fuentes
+vdd 1 0 {v_value}
+va 2 0 pulse(0 {v_value} 20n 50p 50p 20n 40.1n)
+vb 3 0 pulse(0 {v_value} 40.05n 50p 50p 40.05n 80.1n)
+
+* XOR
+x_xor_1 2 46 1 0 not
+x_xor_2 3 47 1 0 not
+x_xor_3 46 3 55 1 0 nand
+x_xor_4 47 2 56 1 0 nand
+x_xor_5 55 56 60 1 0 nand
+
+* Carga
+cload1 60 0 {c_value}
+
+.step param c_value list 1000f 2000f 4000f 6000f
+
+.control
+    set color0="white"
+    set xbrushwidth=2
+    run
+
+    set curplottitle="XOR"
+    plot v(2) v(3)
+    plot v(60)
+.endc
+.end
