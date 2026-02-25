@@ -16,25 +16,26 @@ x_xor_5 55 56 60 1 0 nand
 * Carga
 cload 60 0 200f
 
+* Parametros
 .param v_value = 1.5
+
+* Modo de operacion
+.tran 3ps 80.1n
 
 .control
     set color0="white"
     set xbrushwidth=2
 
-    compose cload_values start=1000f stop=6000f step=1000f
-    let cload_length=length(cload_values)
-    let cload_index=0
-    while (1) {
-        if (cload_index < cload_length) {
-            alter cload cload_values[cload_index]
-            run
-            set curplottitle="XOR"
-            plot v(2) v(3)
-            plot v(60)
-        } else {
-            break
-        }
-    }
+    run
+    set curplottitle="XOR"
+    plot v(2) v(3)
+    foreach valor {1000f 2000f 4000f 6000f}
+        alter cload = $valor
+        run
+        plot v(60)
+    end
+    setplot current
+    plot v(60)
+
 .endc
 .end
