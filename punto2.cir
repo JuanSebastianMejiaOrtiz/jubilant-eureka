@@ -1,0 +1,39 @@
+* Punto 2
+.include "./not_nand_nor_subckt.cir"
+
+* Fuentes
+vdd 1 0 {v_value}
+vc 4 0 pulse(0 {v_value} 20n 50p 50p 20n 40.1n)
+vb 3 0 pulse(0 {v_value} 40.05n 50p 50p 40.05n 80.1n)
+va 2 0 pulse(0 {v_value} 80.05n 50p 50p 80.05n 160.1n)
+
+xnand_1 3 4 50 1 0 nand
+xnot_c 4 44 1 0 not
+xnand_2 2 44 51 1 0 nand
+xnand_final 50 51 52 1 0 nand
+
+* Carga
+cload1 52 0 {c_value}
+
+* Parametros
+.param v_value = 1.5
+.param c_value = 1000f
+
+* Modo de operacion
+.tran 3ps 160.1n
+
+.control
+    set color0="white"
+    set xbrushwidth=2
+    run
+
+    set curplottitle="Entradas"
+    * plot v(2) v(3) v(4)
+    plot v(2) v(3) v(4) v(52)
+
+    set curplottitle="Salida"
+    plot v(52)
+
+.endc
+
+.end
