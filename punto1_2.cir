@@ -27,11 +27,13 @@ cload 60 0 200f
     set xbrushwidth=2
 
     run
-    set curplottitle="XOR"
+    set curplottitle="Entradas"
     plot v(2) v(3)
-    foreach valor {1000f 2000f 4000f 6000f}
+
+    foreach valor 1000f 2000f 4000f 6000f
         alter cload = $valor
         run
+        set curplottitle="XOR {$valor}"
         plot v(60)
     end
     setplot current
