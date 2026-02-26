@@ -3,9 +3,9 @@
 
 * Fuentes
 vdd 1 0 {v_value}
-vc 4 0 pulse(0 {v_value} 20n 50p 50p 20n 40.1n)
-vb 3 0 pulse(0 {v_value} 40.05n 50p 50p 40.05n 80.1n)
-va 2 0 pulse(0 {v_value} 80.05n 50p 50p 80.05n 160.1n)
+vc 4 0 pulse(0 {v_value} 10n 50p 50p 10n 20.1n)
+vb 3 0 pulse(0 {v_value} 20.05n 50p 50p 20.05n 40.1n)
+va 2 0 pulse(0 {v_value} 40.05n 50p 50p 40.05n 80.1n)
 
 xnand_1 3 4 50 1 0 nand
 xnot_c 4 44 1 0 not
@@ -20,7 +20,7 @@ cload1 52 0 {c_value}
 .param c_value = 1000f
 
 * Modo de operacion
-.tran 3ps 160.1n
+.tran 3ps 80.1n
 
 .control
     set color0="white"
