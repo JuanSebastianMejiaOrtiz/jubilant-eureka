@@ -1,0 +1,73 @@
+*Punto 1.1
+.include "./not_nand_nor_subckt.cir"
+
+* Fuentes
+vdd 1 0 {v_value}
+va 2 0 pulse(0 {v_value} 20n 50p 50p 20n 40.1n)
+vb 3 0 pulse(0 {v_value} 40.05n 50p 50p 40.05n 80.1n)
+vcin 4 0 pulse(0 {v_value} 80.1n 50p 50p 80.1n 160.1n)
+
+*sumador completo
+*Carry out
+
+*primer termino
+x_nand_1 3 4 50 1 0 nand
+
+*segundo termino
+x_nand_2 2 4 51 1 0 nand
+
+*tercer termino
+x_nand_3 2 3 52 1 0 nand
+
+*global
+x_ab_nand 50 51 53 1 0 nand
+x_ab_not 53 54 1 0 not
+x_ab_c_nand 52 54 55 1 0 nand
+
+*Si
+
+*b xor cin: 
+
+x_not_1 3 56 1 0 not
+x_not_2 4 57 1 0 not
+x_xor_1 56 4 58 1 0 nand
+x_xor_2 3 57 59 1 0 nand
+x_xor_3 58 59 60 1 0 nand
+
+*a xor (b por cin):
+
+x_not2_1 2 61 1 0 not
+x_not2_2 60 62 1 0 not
+x_xor2_1 61 60 63 1 0 nand
+x_xor2_2 2 62 64 1 0 nand
+x_xor2_3 63 64 65 1 0 nand
+
+
+
+cload1 55 0 {c_value}
+cload2 65 0 {c_value}
+
+
+.param v_value = 1.5
+.param c_value = 1000f
+
+
+.tran 3ps 160.1n
+
+
+.control
+    set color0="white"
+    set xbrushwidth=2
+    run
+
+    set curplottitle="Entradas"
+    plot v(2) v(3) v(4)
+    set curplottitle="Carry out"
+    plot v(55)
+    set curplottitle="Suma"
+    plot v(65)
+
+.endc
+.end
+
+
