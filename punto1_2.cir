@@ -34,10 +34,13 @@ cload 60 0 200f
         alter cload = $valor
         run
         set curplottitle="XOR {$valor}"
-        plot v(60)
+        plot v(60) 1.35 0.75 0.15
+
+        meas tran iave INTEG i(vdd) from=0ns to=80.1ns
+        let power = -iave * 1.5 / 80.1ns ; how to access psu from here?
+        print $valor
+        print power
     end
-    setplot current
-    plot v(60)
 
 .endc
 .end
