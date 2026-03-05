@@ -1,0 +1,43 @@
+*Punto 1.2
+.include "./not_nand_nor_subckt.cir"
+
+* Fuentes
+vdd 1 0 {v_value}
+va 2 0 pulse(0 {v_value} 20n 50p 50p 20n 40.1n)
+vb 3 0 pulse(0 {v_value} 40.05n 50p 50p 40.05n 80.1n)
+
+* XOR
+x_xor_1 2 46 1 0 not
+x_xor_2 3 47 1 0 not
+x_xor_3 46 3 55 1 0 nand
+x_xor_4 47 2 56 1 0 nand
+x_xor_5 55 56 60 1 0 nand
+
+* Carga
+cload 60 0 200f
+
+* Parametros
+.param v_value = 1.5
+
+* Modo de operacion
+.tran 3ps 80.1n
+
+.control
+    set color0="white"
+    set xbrushwidth=2
+
+    run
+    set curplottitle="Entradas"
+    plot v(2) v(3)
+
+    foreach valor 1000f 2000f 4000f 6000f
+        alter cload = $valor
+        run
+        set curplottitle="XOR {$valor}"
+        plot v(60)
+    end
+    setplot current
+    plot v(60)
+
+.endc
+.end

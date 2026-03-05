@@ -36,11 +36,13 @@ cload2 52 0 {c_value}
 cload3 53 0 {c_value}
 cload4 54 0 {c_value}
 cload5 60 0 {c_value}
-* cload6 61 0 {c_value}
+cload6 61 0 {c_value}
 
+* Parametros
 .param v_value = 1.5
 .param c_value = 200f
 
+* Modo de operacion
 .tran 3ps 80.1n
 
 .control
@@ -48,28 +50,25 @@ cload5 60 0 {c_value}
     set xbrushwidth=2
     run
 
-    * set curplottitle="NAND"
-    * plot v(2) v(3)
-    * plot v(51)
+    set curplottitle="Entradas"
+    plot v(2) v(3)
 
-    * set curplottitle="NOR"
-    * plot v(2) v(3)
-    * plot v(52)
+    set curplottitle="NAND"
+    plot v(51)
 
-    * set curplottitle="AND"
-    * plot v(2) v(3)
-    * plot v(53)
+    set curplottitle="NOR"
+    plot v(52)
 
-    * set curplottitle="OR"
-    * plot v(2) v(3)
-    * plot v(54)
+    set curplottitle="AND"
+    plot v(53)
 
-    * set curplottitle="XOR"
-    * plot v(2) v(3)
-    * plot v(60)
+    set curplottitle="OR"
+    plot v(54)
+
+    set curplottitle="XOR"
+    plot v(60)
 
     set curplottitle="XNOR"
-    plot v(2) v(3)
     plot v(61)
 .endc
 .end
